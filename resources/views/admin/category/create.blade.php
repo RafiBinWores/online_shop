@@ -32,7 +32,7 @@
                     @enderror
                 </div>
                 <div class="mb-3">
-                    <label for="validationCustom04" class="form-label">State</label>
+                    <label for="validationCustom04" class="form-label">Status</label>
                     <select class="form-select" name="status" id="validationCustom04" required>
                         <option selected disabled value="">Choose...</option>
                         <option value="1">Active</option>

@@ -22,7 +22,9 @@
                     </div>
                 </div><!-- end col-->
                 <div class="col-md-8">
-                    <form class="d-flex flex-wrap align-items-center justify-content-sm-end">
+                    <form action="" method="GET" class="d-flex flex-wrap align-items-center justify-content-sm-end">
+                        @csrf
+                        @method('get')
                         <label for="status-select" class="me-2">Sort By</label>
                         <div class="me-sm-2">
                             <select class="form-select my-1 my-md-0" id="status-select">
@@ -35,8 +37,8 @@
                         </div>
                         <label for="inputPassword2" class="visually-hidden">Search</label>
                         <div>
-                            <input type="search" class="form-control my-1 my-md-0" id="inputPassword2"
-                                placeholder="Search...">
+                            <input type="search" name="keyword" value="{{ Request::get('keyword') }}"
+                                class="form-control my-1 my-md-0" id="inputPassword2" placeholder="Search...">
                         </div>
                     </form>
                 </div>
