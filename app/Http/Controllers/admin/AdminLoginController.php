@@ -8,12 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminLoginController extends Controller
 {
+
+    //get admin login page
     public function index()
     {
         return view('admin.login');
     }
 
-    //put
+    //post
     //admin login
     public function authenticate(Request $request)
     {
