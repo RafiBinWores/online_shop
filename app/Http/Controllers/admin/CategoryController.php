@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class CategoryController extends Controller
 {
@@ -32,14 +33,23 @@ class CategoryController extends Controller
     {
         $validator = $request->validate([
             'name' => 'required|unique:categories',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:5048',
             'status' => 'required',
         ]);
 
         if ($validator) {
 
+            if ($request->hasFile('image')) {
+                $newImageName = time() . '.' . $request->image->extension();
+                $request->image->move(public_path() . '/uploads/category/' . $newImageName);
+            } else {
+                $newImageName = null;
+            }
+
             $category = new Category();
             $category->name = trim($request->name);
             $category->slug = strtolower(str_replace(' ', '-', $request->name));
+            $category->image = $newImageName;
             $category->status = $request->status;
             $category->save();
 
@@ -51,13 +61,55 @@ class CategoryController extends Controller
 
 
     // get category edit page
-    public function edit()
+    public function edit($categoryId, Request $request)
     {
+        $category = Category::find($categoryId);
+
+        if (empty($category)) {
+            return redirect()->route('categories.index')->with('error', 'Category not found!');
+        }
+        return view('admin.category.editCategory', compact('category'));
     }
 
     //update category
-    public function update()
+    public function update($categoryId, Request $request)
     {
+
+        $category = Category::find($categoryId);
+
+        if (empty($category)) {
+            return redirect()->route('categories.index');
+        }
+
+        $validator = $request->validate([
+            'name' => 'required|unique:categories,name,' . $category->id . ',id',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:5048',
+            'status' => 'required',
+        ]);
+
+        if ($validator) {
+
+            if ($request->hasFile('image')) {
+                $oldImage = $category->image;
+
+                $newImageName = $category->slug . '-' . time() . '.' . $request->image->extension();
+                $request->image->move(public_path() . '/uploads/category/', $newImageName);
+
+                File::delete(public_path() . '/uploads/category/' . $oldImage);
+            } else {
+                $newImageName = null;
+            }
+
+            $category->name = trim($request->name);
+            $category->slug = strtolower(str_replace(' ', '-', $request->name));
+            $category->image = $newImageName;
+            $category->status = $request->status;
+            $category->save();
+
+            return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+        } else {
+            return redirect()->route('categories.create')->withErrors($validator)->withInput();
+        }
     }
 
     //delete category 

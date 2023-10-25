@@ -46,6 +46,8 @@
         </div>
     </div>
 
+    {{-- alert --}}
+    @include('admin.alert')
 
     {{-- category table --}}
     <div class="card">
@@ -72,7 +74,7 @@
                 <table class="table align-middle mb-0">
                     <thead class="table-light">
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Category Name</th>
                             <th>Slug</th>
                             <th>Status</th>
@@ -84,7 +86,9 @@
                         @if ($categories->isNotEmpty())
                             @foreach ($categories as $category)
                                 <tr>
-                                    <th scope="row">{{ $category->id }}</th>
+                                    <th scope="row">
+                                        {{ $loop->iteration + $categories->perPage() * ($categories->currentPage() - 1) }}
+                                    </th>
                                     <td>{{ $category->name }}</td>
                                     <td>{{ $category->slug }}</td>
                                     <td>
@@ -96,7 +100,8 @@
                                     </td>
 
                                     <td>
-                                        <a href="" class="btn btn-success waves-effect waves-light"><i
+                                        <a href="{{ route('categories.edit', $category->id) }}"
+                                            class="btn btn-success waves-effect waves-light"><i
                                                 class="mdi mdi-square-edit-outline"></i></a>
                                         <a href="" class="btn btn-danger waves-effect waves-light"><i
                                                 class="mdi mdi-delete"></i></a>
@@ -114,5 +119,8 @@
     </div>
 
     {{-- pagination --}}
-    {{ $categories->links() }}
+    <div class="pagination-rounded">
+        {{ $categories->links() }}
+    </div>
+
 @endsection

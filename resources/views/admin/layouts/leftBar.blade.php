@@ -76,7 +76,7 @@
 
                 <li>
                     <a href="apps-calendar.html">
-                        <i class="mdi mdi-calendar-blank-outline"></i>
+                        <i class="fe-users"></i>
                         <span> Users </span>
                     </a>
                 </li>
@@ -85,6 +85,18 @@
                     <a href="{{ route('categories.index') }}">
                         <i class="mdi mdi-view-grid-outline"></i>
                         <span> Categories </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('categories.index') }}">
+                        <i class="fe-shopping-cart"></i>
+                        <span> Products </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('categories.index') }}">
+                        <i class="mdi mdi-clipboard-list-outline"></i>
+                        <span> Orders </span>
                     </a>
                 </li>
 
