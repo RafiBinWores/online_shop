@@ -88,6 +88,12 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('subcategories.index') }}">
+                        <i class="ti-layout-list-thumb"></i>
+                        <span> Sub Categories </span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('categories.index') }}">
                         <i class="fe-shopping-cart"></i>
                         <span> Products </span>

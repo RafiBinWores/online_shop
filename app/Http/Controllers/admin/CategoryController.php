@@ -25,7 +25,7 @@ class CategoryController extends Controller
     //get category add page
     public function create()
     {
-        return view('admin.category.create');
+        return view('admin.category.createCategory');
     }
 
     //store category 
