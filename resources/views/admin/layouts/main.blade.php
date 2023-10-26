@@ -10,7 +10,7 @@
     <meta content="Coderthemes" name="author" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ url('admin-assets/images/favicon.ico') }}">
+    <link rel="shortcut icon" href="{{ asset('admin-assets/images/favicon.ico') }}">
 
     <!-- App css -->
     <link href="{{ asset('admin-assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
@@ -102,6 +102,12 @@
 
     <!-- App js-->
     <script src="{{ asset('admin-assets/js/app.min.js') }}"></script>
+
+    {{-- Sweet Alert --}}
+    <script src="{{ asset('admin-assets/libs/sweetalert2/sweetalert2.all.min.js') }}" aria-hidden="true"></script>
+
+    {{-- sweet alert init --}}
+    <script src="{{ asset('admin-assets/js/pages/sweet-alerts.init.js') }}"></script>
 
     @yield('customJs')
 

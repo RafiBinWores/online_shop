@@ -101,10 +101,13 @@
 
                                     <td>
                                         <a href="{{ route('categories.edit', $category->id) }}"
-                                            class="btn btn-success waves-effect waves-light"><i
-                                                class="mdi mdi-square-edit-outline"></i></a>
-                                        <a href="" class="btn btn-danger waves-effect waves-light"><i
-                                                class="mdi mdi-delete"></i></a>
+                                            class="btn btn-success waves-effect waves-light">
+                                            <i class="mdi mdi-square-edit-outline"></i>
+                                        </a>
+                                        <a href="{{ route('categories.destroy', $category->id) }}"
+                                            class="btn btn-danger waves-effect waves-light delete-category">
+                                            <i class="mdi mdi-delete"></i>
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -123,4 +126,42 @@
         {{ $categories->links() }}
     </div>
 
+@endsection
+
+
+@section('customJs')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.delete-category');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const deleteUrl = this.getAttribute('href');
+
+                    Swal.fire({
+                            title: '<span style="color: #595959;">Are you sure?</span>',
+                            text: 'You won\'t be able to revert this!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Yes, delete it!',
+                            cancelButtonText: 'Cancel'
+                        })
+                        .then((result) => {
+                            if (result.isConfirmed) {
+                                Swal.fire(
+                                    '<span style="color: #595959;">Deleted!</span>',
+                                    'User has been deleted.',
+                                    'success'
+                                ).then((result) => {
+                                    window.location.href = deleteUrl;
+                                })
+                            }
+                        });
+                });
+            });
+        });
+    </script>
 @endsection

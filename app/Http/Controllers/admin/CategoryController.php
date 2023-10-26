@@ -41,7 +41,7 @@ class CategoryController extends Controller
 
             if ($request->hasFile('image')) {
                 $newImageName = time() . '.' . $request->image->extension();
-                $request->image->move(public_path() . '/uploads/category/' . $newImageName);
+                $request->image->move(public_path() . '/uploads/category/', $newImageName);
             } else {
                 $newImageName = null;
             }
@@ -53,7 +53,7 @@ class CategoryController extends Controller
             $category->status = $request->status;
             $category->save();
 
-            return redirect()->route('categories.create')->with('success', 'Category added successfully.');
+            return redirect()->route('categories.index')->with('success', 'Category added successfully.');
         } else {
             return redirect()->route('categories.create')->withErrors($validator)->withInput();
         }
@@ -74,7 +74,6 @@ class CategoryController extends Controller
     //update category
     public function update($categoryId, Request $request)
     {
-
         $category = Category::find($categoryId);
 
         if (empty($category)) {
@@ -113,7 +112,18 @@ class CategoryController extends Controller
     }
 
     //delete category 
-    public function destroy()
+    public function destroy($categoryId)
     {
+        $category = Category::find($categoryId);
+
+        if ($category) {
+
+            File::delete(public_path() . '/uploads/category/' . $category->image);
+            $category->delete();
+
+            return redirect()->route('categories.index');
+        }
+
+        return redirect()->route('categories.index');
     }
 }
