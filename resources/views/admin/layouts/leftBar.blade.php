@@ -94,13 +94,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('categories.index') }}">
+                    <a href="{{ route('brands.index') }}">
+                        <i class="fe-tag"></i>
+                        <span> Brands </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
                         <i class="fe-shopping-cart"></i>
                         <span> Products </span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('categories.index') }}">
+                    <a href="">
                         <i class="mdi mdi-clipboard-list-outline"></i>
                         <span> Orders </span>
                     </a>
