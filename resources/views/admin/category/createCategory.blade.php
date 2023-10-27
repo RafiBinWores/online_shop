@@ -40,7 +40,7 @@
                         <option value="2">Block</option>
                     </select>
                     <div class="invalid-feedback">
-                        Please select a valid state.
+                        Please select a valid status.
                     </div>
                 </div>
                 <div class="mb-3">
