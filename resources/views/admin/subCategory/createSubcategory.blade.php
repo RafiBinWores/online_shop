@@ -24,10 +24,9 @@
                 @method('post')
                 <div class="mb-3">
                     <label for="name" class="form-label">Subcategory Name</label>
-                    <input type="text" class="form-control @error('subcategory_name') is-invalid @enderror"
-                        id="name" placeholder="Subcategory Name" name="subcategory_name"
-                        value="{{ old('subcategory_name') }}" required>
-                    @error('subcategory_name')
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                        placeholder="Subcategory Name" name="name" value="{{ old('name') }}" required>
+                    @error('name')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -43,6 +42,17 @@
                     </select>
                     <div class="invalid-feedback">
                         Please select a valid category.
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="validationCustom04" class="form-label">Status</label>
+                    <select class="form-select" name="status" id="validationCustom04" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option value="1">Active</option>
+                        <option value="2">Block</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid status.
                     </div>
                 </div>
                 {{-- <div class="mb-3">

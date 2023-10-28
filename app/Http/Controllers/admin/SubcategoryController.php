@@ -4,15 +4,15 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Subcategory;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 
-class SubcategoryController extends Controller
+class SubCategoryController extends Controller
 {
     //get subcategory list page
     public function index(Request $request)
     {
-        $subcategories = Subcategory::latest();
+        $subcategories = SubCategory::select('sub_categories.*', 'categories.name as categoryName')->latest()->leftJoin('categories', 'categories.id', 'sub_categories.category_id');
 
         if (!empty($request->get('keyword'))) {
             $subcategories = $subcategories->where('subcategory_name', 'like', '%' . $request->keyword . '%');
@@ -33,21 +33,21 @@ class SubcategoryController extends Controller
     public function store(Request $request)
     {
         $validator = $request->validate([
-            'subcategory_name' => 'required|unique:subcategories',
+            'name' => 'required|unique:sub_categories',
+            'status' => 'required',
             'category_id' => 'required',
-            // 'status' => 'required',
+
         ]);
 
         if ($validator) {
 
             $category_id = $request->category_id;
-            $category_name = Category::where('id', $category_id)->value('name');
 
-            $subcategory = new Subcategory();
-            $subcategory->subcategory_name = trim($request->subcategory_name);
-            $subcategory->slug = strtolower(str_replace(' ', '-', $request->subcategory_name));
+            $subcategory = new SubCategory();
+            $subcategory->name = trim($request->name);
+            $subcategory->slug = strtolower(str_replace(' ', '-', $request->name));
+            $subcategory->status = $request->status;
             $subcategory->category_id = $category_id;
-            $subcategory->category_name = $category_name;
             $subcategory->save();
 
             Category::where('id', $category_id)->increment('subcategory_count', 1);
@@ -61,7 +61,7 @@ class SubcategoryController extends Controller
     //get subcategory edit page
     public function edit($subcategoryId)
     {
-        $subcategory = Subcategory::find($subcategoryId);
+        $subcategory = SubCategory::find($subcategoryId);
 
         if (empty($subcategory)) {
             return redirect()->route('subcategories.index')->with('error', 'Subcategory not found!');
@@ -72,20 +72,22 @@ class SubcategoryController extends Controller
     //update sub category 
     public function update($subcategoryId, Request $request)
     {
-        $subcategory = Subcategory::find($subcategoryId);
+        $subcategory = SubCategory::find($subcategoryId);
 
         if (empty($subcategory)) {
             return redirect()->route('subcategories.index');
         }
 
         $validator = $request->validate([
-            'subcategory_name' => 'required|unique:subcategories,subcategory_name,' . $subcategory->id . ',id',
+            'name' => 'required|unique:sub_categories,name,' . $subcategory->id . ',id',
+            'status' => 'required'
         ]);
 
         if ($validator) {
 
-            $subcategory->subcategory_name = trim($request->subcategory_name);
-            $subcategory->slug = strtolower(str_replace(' ', '-', $request->subcategory_name));
+            $subcategory->name = trim($request->name);
+            $subcategory->slug = strtolower(str_replace(' ', '-', $request->name));
+            $subcategory->status = $request->status;
             $subcategory->save();
 
             return redirect()->route('subcategories.index')->with('success', 'Subcategory updated successfully.');
@@ -97,8 +99,8 @@ class SubcategoryController extends Controller
     //delete sub category
     public function destroy($subcategoryId)
     {
-        $categoryId = Subcategory::where('id', $subcategoryId)->value('category_id');
-        Subcategory::findOrFail($subcategoryId)->delete();
+        $categoryId = SubCategory::where('id', $subcategoryId)->value('category_id');
+        SubCategory::findOrFail($subcategoryId)->delete();
 
         Category::where('id', $categoryId)->decrement('subcategory_count', 1);
 

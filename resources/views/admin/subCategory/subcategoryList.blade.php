@@ -61,6 +61,7 @@
                             <th>Subcategory Name</th>
                             <th>Category Name</th>
                             <th>Product</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -72,16 +73,16 @@
                                     <th scope="row">
                                         {{ $loop->iteration + $subcategories->perPage() * ($subcategories->currentPage() - 1) }}
                                     </th>
-                                    <td>{{ $subcategory->subcategory_name }}</td>
-                                    <td>{{ $subcategory->category_name }}</td>
+                                    <td>{{ $subcategory->name }}</td>
+                                    <td>{{ $subcategory->categoryName }}</td>
                                     <td>{{ $subcategory->product_count }}</td>
-                                    {{-- <td>
-                                        @if ($category->status == 1)
+                                    <td>
+                                        @if ($subcategory->status == 1)
                                             <i class="fe-check text-success"></i>
                                         @else
                                             <i class="fe-x text-danger"></i>
                                         @endif
-                                    </td> --}}
+                                    </td>
 
                                     <td>
                                         <a href="{{ route('subcategories.edit', $subcategory->id) }}"
