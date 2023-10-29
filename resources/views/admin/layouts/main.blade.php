@@ -12,6 +12,8 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin-assets/images/favicon.ico') }}">
 
+    <link href="{{ asset('admin-assets/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+
     <!-- App css -->
     <link href="{{ asset('admin-assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
 
@@ -108,6 +110,12 @@
 
     {{-- sweet alert init --}}
     <script src="{{ asset('admin-assets/js/pages/sweet-alerts.init.js') }}"></script>
+
+    <!-- Plugins js -->
+    <script src="{{ asset('admin-assets/libs/quill/quill.min.js') }}"></script>
+
+    <!-- Init js-->
+    <script src="{{ asset('admin-assets/js/pages/form-quilljs.init.js') }}"></script>
 
     @yield('customJs')
 

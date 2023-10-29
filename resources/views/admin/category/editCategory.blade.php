@@ -14,7 +14,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h4 class="header-title mb-3">Edit Category</h4>
+            <h4 class="header-title mb-3">Basic Information</h4>
 
             @include('admin.alert')
 

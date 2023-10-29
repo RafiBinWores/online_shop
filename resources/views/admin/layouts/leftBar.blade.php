@@ -100,7 +100,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('products.create') }}">
                         <i class="fe-shopping-cart"></i>
                         <span> Products </span>
                     </a>

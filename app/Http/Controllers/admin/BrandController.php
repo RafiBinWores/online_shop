@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
-    // view category page
+    // view brand page
     public function index(Request $request)
     {
         $brands = Brand::latest();
@@ -21,13 +21,13 @@ class BrandController extends Controller
         return view('admin.brand.brandList', compact('brands'));
     }
 
-    //get category add page
+    //get brand add page
     public function create()
     {
         return view('admin.brand.createBrand');
     }
 
-    //store category 
+    //store brand 
     public function store(Request $request)
     {
         $validator = $request->validate([
@@ -61,7 +61,7 @@ class BrandController extends Controller
         return view('admin.brand.editBrand', compact('brand'));
     }
 
-    // //update category
+    //update brand
     public function update($brandId, Request $request)
     {
         $brand = Brand::find($brandId);
@@ -89,7 +89,7 @@ class BrandController extends Controller
         }
     }
 
-    // //delete category 
+    //delete brand 
     public function destroy($brandId)
     {
         Brand::findOrFail($brandId)->delete();
