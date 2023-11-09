@@ -6,19 +6,24 @@
     <meta charset="utf-8" />
     <title>@yield('page-title')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin-assets/images/favicon.ico') }}">
 
-    <link href="{{ asset('admin-assets/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin-assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" />
+
+    {{-- Quill --}}
+    <link href="{{ asset('admin-assets/libs/quill/quill.snow.css') }}" rel="stylesheet" />
 
     <!-- App css -->
-    <link href="{{ asset('admin-assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="{{ asset('admin-assets/css/app.min.css') }}" rel="stylesheet" id="app-style" />
 
     <!-- icons -->
-    <link href="{{ asset('admin-assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin-assets/css/icons.min.css') }}" rel="stylesheet" />
 
 </head>
 
@@ -102,20 +107,16 @@
     <!-- Dashboar init js-->
     <script src="{{ asset('admin-assets/js/pages/dashboard.init.js') }}"></script>
 
-    <!-- App js-->
-    <script src="{{ asset('admin-assets/js/app.min.js') }}"></script>
-
-    {{-- Sweet Alert --}}
-    <script src="{{ asset('admin-assets/libs/sweetalert2/sweetalert2.all.min.js') }}" aria-hidden="true"></script>
-
-    {{-- sweet alert init --}}
-    <script src="{{ asset('admin-assets/js/pages/sweet-alerts.init.js') }}"></script>
-
     <!-- Plugins js -->
+    <script src="{{ asset('admin-assets/libs/sweetalert2/sweetalert2.all.min.js') }}" aria-hidden="true"></script>
     <script src="{{ asset('admin-assets/libs/quill/quill.min.js') }}"></script>
+    <script src="{{ asset('admin-assets/libs/dropzone/min/dropzone.min.js') }}"></script>
 
     <!-- Init js-->
     <script src="{{ asset('admin-assets/js/pages/form-quilljs.init.js') }}"></script>
+
+    <!-- App js-->
+    <script src="{{ asset('admin-assets/js/app.min.js') }}"></script>
 
     @yield('customJs')
 

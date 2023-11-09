@@ -12,7 +12,6 @@ class Product extends Model
         'name',
         'slug',
         'description',
-        'images',
         'price',
         'compare_price',
         'category_id',

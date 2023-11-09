@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\admin\SubcategoryController;
+use App\Http\Controllers\admin\TempImagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/brands/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
         Route::put('/brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
         Route::get('/brands/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
+
+        //Getting product sub categories
+        Route::get('/productSubCategory', [ProductController::class, 'subCategory'])->name('product.subCategory');
+
+        //create temp images
+        Route::post('/upload-temp-image', [TempImagesController::class, 'create'])->name('tempImages.create');
 
         //Product routes
         Route::get('/products', [ProductController::class, 'index'])->name('products.index');
