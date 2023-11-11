@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\BrandController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\HomeController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\admin\ProductImageController;
 use App\Http\Controllers\admin\SubcategoryController;
 use App\Http\Controllers\admin\TempImagesController;
 
@@ -62,18 +63,22 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/brands/{brand}', [BrandController::class, 'update'])->name('brands.update');
         Route::get('/brands/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
 
-        //Getting product sub categories
-        Route::get('/productSubCategory', [ProductController::class, 'subCategory'])->name('product.subCategory');
-
-        //create temp images
-        Route::post('/upload-temp-image', [TempImagesController::class, 'create'])->name('tempImages.create');
-
         //Product routes
         Route::get('/products', [ProductController::class, 'index'])->name('products.index');
         Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
         Route::post('/products', [ProductController::class, 'store'])->name('products.store');
         Route::get('/products/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
         Route::put('/products/{product}', [ProductController::class, 'update'])->name('products.update');
-        Route::get('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+        Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+
+        //Getting product sub categories
+        Route::get('/productSubCategory', [ProductController::class, 'subCategory'])->name('product.subCategory');
+
+        //create temp images
+        Route::post('/upload-temp-image', [TempImagesController::class, 'create'])->name('tempImages.create');
+
+        //Product Image Update Route
+        Route::post('/product-images/update', [ProductImageController::class, 'update'])->name('product-images.update');
+        Route::delete('/product-images', [ProductImageController::class, 'destroy'])->name('product-images.destroy');
     });
 });

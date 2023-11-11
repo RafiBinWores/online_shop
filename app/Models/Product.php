@@ -24,4 +24,9 @@ class Product extends Model
         'track_quantity',
         'status'
     ];
+
+    public function product_images()
+    {
+        return $this->hasMany(productImage::class);
+    }
 }

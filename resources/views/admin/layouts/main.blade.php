@@ -14,10 +14,11 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="{{ asset('admin-assets/images/favicon.ico') }}">
 
-    <link href="{{ asset('admin-assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" />
-
     {{-- Quill --}}
-    <link href="{{ asset('admin-assets/libs/quill/quill.snow.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin-assets/libs/quill/quill.snow.css') }}" rel="stylesheet" type="text/css" />
+
+    {{-- Dropzone --}}
+    <link href="{{ asset('admin-assets/libs/dropzone/min/dropzone.min.css') }}" rel="stylesheet" />
 
     <!-- App css -->
     <link href="{{ asset('admin-assets/css/app.min.css') }}" rel="stylesheet" id="app-style" />
@@ -108,9 +109,10 @@
     <script src="{{ asset('admin-assets/js/pages/dashboard.init.js') }}"></script>
 
     <!-- Plugins js -->
-    <script src="{{ asset('admin-assets/libs/sweetalert2/sweetalert2.all.min.js') }}" aria-hidden="true"></script>
+    <script src="{{ asset('admin-assets/libs/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="{{ asset('admin-assets/libs/quill/quill.min.js') }}"></script>
     <script src="{{ asset('admin-assets/libs/dropzone/min/dropzone.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin-assets/libs/toastr/build/toastr.min.js') }}"></script> --}}
 
     <!-- Init js-->
     <script src="{{ asset('admin-assets/js/pages/form-quilljs.init.js') }}"></script>
