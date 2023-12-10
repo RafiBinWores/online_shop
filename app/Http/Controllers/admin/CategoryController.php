@@ -35,6 +35,7 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:5048',
             'status' => 'required',
+            'is_featured' => 'required',
         ]);
 
         if ($validator) {
@@ -51,6 +52,7 @@ class CategoryController extends Controller
             $category->slug = strtolower(str_replace(' ', '-', $request->name));
             $category->image = $newImageName;
             $category->status = $request->status;
+            $category->is_featured = $request->is_featured;
             $category->save();
 
             return redirect()->route('categories.index')->with('success', 'Category added successfully.');
@@ -84,6 +86,7 @@ class CategoryController extends Controller
             'name' => 'required|unique:categories,name,' . $category->id . ',id',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:5048',
             'status' => 'required',
+            'is_featured' => 'required',
         ]);
 
         if ($validator) {
@@ -103,6 +106,7 @@ class CategoryController extends Controller
             $category->slug = strtolower(str_replace(' ', '-', $request->name));
             $category->image = $newImageName;
             $category->status = $request->status;
+            $category->is_featured = $request->is_featured;
             $category->save();
 
             return redirect()->route('categories.index')->with('success', 'Category updated successfully.');

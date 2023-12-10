@@ -11,7 +11,6 @@ use App\Models\SubCategory;
 use App\Models\TempImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Image;
 
@@ -209,8 +208,6 @@ class ProductController extends Controller
             $product->sub_category_id  = $request->subCategory;
             $product->price = $request->price;
             $product->save();
-
-            //save images
 
             $request->session()->flash('success', 'Product updated successfully.');
             return response()->json([

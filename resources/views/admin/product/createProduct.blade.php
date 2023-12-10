@@ -165,7 +165,7 @@
                 </div>
 
                 <button class="btn btn-primary" type="submit" name="submit">Add Product</button>
-                <a href="{{ route('brands.index') }}" type="reset" class="btn btn-secondary waves-effect">Cancel</a>
+                <a href="{{ route('products.index') }}" type="reset" class="btn btn-secondary waves-effect">Cancel</a>
             </form>
 
         </div> <!-- end card-body-->
@@ -215,8 +215,7 @@
                 dataType: 'json',
                 success: function(response) {
                     if (response['status'] == true) {
-                        windows.reload();
-
+                        location.reload();
                     } else {
                         let errors = response['errors'];
 

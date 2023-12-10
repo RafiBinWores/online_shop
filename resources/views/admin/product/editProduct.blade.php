@@ -198,7 +198,7 @@
                 </div>
 
                 <button class="btn btn-primary" type="submit" name="submit">Update Product</button>
-                <a href="{{ route('brands.index') }}" type="reset" class="btn btn-secondary waves-effect">Cancel</a>
+                <a href="{{ route('products.index') }}" type="reset" class="btn btn-secondary waves-effect">Cancel</a>
             </form>
 
         </div> <!-- end card-body-->
