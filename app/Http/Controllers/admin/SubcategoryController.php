@@ -35,6 +35,7 @@ class SubCategoryController extends Controller
         $validator = $request->validate([
             'name' => 'required|unique:sub_categories',
             'status' => 'required',
+            'is_featured' => 'required',
             'category_id' => 'required',
 
         ]);
@@ -47,6 +48,7 @@ class SubCategoryController extends Controller
             $subcategory->name = trim($request->name);
             $subcategory->slug = strtolower(str_replace(' ', '-', $request->name));
             $subcategory->status = $request->status;
+            $subcategory->is_featured = $request->is_featured;
             $subcategory->category_id = $category_id;
             $subcategory->save();
 
@@ -80,7 +82,8 @@ class SubCategoryController extends Controller
 
         $validator = $request->validate([
             'name' => 'required|unique:sub_categories,name,' . $subcategory->id . ',id',
-            'status' => 'required'
+            'status' => 'required',
+            'is_featured' => 'required'
         ]);
 
         if ($validator) {
@@ -88,6 +91,7 @@ class SubCategoryController extends Controller
             $subcategory->name = trim($request->name);
             $subcategory->slug = strtolower(str_replace(' ', '-', $request->name));
             $subcategory->status = $request->status;
+            $subcategory->is_featured = $request->is_featured;
             $subcategory->save();
 
             return redirect()->route('subcategories.index')->with('success', 'Subcategory updated successfully.');

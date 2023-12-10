@@ -43,6 +43,17 @@
                         Please select a valid status.
                     </div>
                 </div>
+                <div class="mb-3">
+                    <label for="validationCustom05" class="form-label">Featured</label>
+                    <select class="form-select" name="is_featured" id="validationCustom05" required>
+                        <option selected disabled value="">Choose...</option>
+                        <option {{ $subcategory->is_featured == 'Yes' ? 'selected' : '' }} value="Yes">Yes</option>
+                        <option {{ $subcategory->is_featured == 'No' ? 'selected' : '' }} value="No">No</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Please select a valid status.
+                    </div>
+                </div>
 
                 <button class="btn btn-primary" type="submit">Update</button>
                 <a href="{{ route('subcategories.index') }}" type="reset"
